@@ -1,0 +1,14 @@
+name: socksify
+
+up:
+  - ruby: 2.5.0
+  - bundler
+
+commands:
+  test:
+    syntax:
+      argument: file
+      optional: args...
+    run: bundle exec rake test
+  console:
+    run: irb
