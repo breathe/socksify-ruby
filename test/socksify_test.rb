@@ -199,7 +199,7 @@ class SocksifyTest < MiniTest::Test
       req = Net::HTTP::Get.new(path || '/')
       req['Host'] = host_header || uri.host
       req['User-Agent'] = 'ruby-socksify test'
-      body = http.request(req)&.body
+      body = http.request(req).body
     end
 
     body
