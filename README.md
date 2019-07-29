@@ -57,6 +57,18 @@ Socksify::proxy("127.0.0.1", 9050) {
 
 Please note: **socksify is not thread-safe** when used this way! `socks_server` and `socks_port` are stored in class `@@`-variables, and applied to all threads and fibers of application.
 
+### Using explicit argument to opt only sockets which need SOCKS proxying into proxy
+
+Unlike block only: this is thread-safe.
+
+```ruby
+socks_server = "127.0.0.1"
+socks_port = 9050
+peer_host = "rubyforge.org"
+socks_connection_info = SOCKSConnectionPeerAddress.new(socks_server, socks_port, peer_host)
+socket = TCPSocket.open(socks_connection_info, 80)
+```
+
 ### Use Net::HTTP explicitly via SOCKS
 
 Require the additional library `socksify/http` and use the `Net::HTTP.SOCKSProxy` method. It is similar to `Net:HTTP.Proxy` from the Ruby standard library:
@@ -100,14 +112,14 @@ Send patches via GitHub.
 
 ### Further ideas
 
-*   `Resolv` replacement code, so that programs which resolve by themselves don't leak DNS queries
-*   IPv6 address support
-*   UDP as soon as [Tor](http://www.torproject.org/) supports it
-*   Perhaps using standard exceptions for better compatibility when acting as a drop-in?
+- `Resolv` replacement code, so that programs which resolve by themselves don't leak DNS queries
+- IPv6 address support
+- UDP as soon as [Tor](http://www.torproject.org/) supports it
+- Perhaps using standard exceptions for better compatibility when acting as a drop-in?
 
 ## Author
 
-*   [Stephan Maka](mailto:stephan@spaceboyz.net)
+- [Stephan Maka](mailto:stephan@spaceboyz.net)
 
 ## License
 
